@@ -11,6 +11,8 @@
 
 	    <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
       <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="jquery-ui/jquery-ui.theme.css">
+
 
 
 </head>
@@ -19,11 +21,13 @@
 
 
   <!-- Tabs -->
+  <div id="panel">
   <div id="tabs">
   	<ul>
-  		<li><a href="#divconfig">Configuration</a></li>
   		<li><a href="#divnavigation">Manual</a></li>
+  		<li><a href="#divconfig">Configuration</a></li>
   		<li><a href="#divgcode">Execute Gcode</a></li>
+  		<li><a href="#divabout">About</a></li>
   	</ul>
   	<div id="divnavigation">
       <div class="container">
@@ -46,10 +50,37 @@
       	</ul>
       </div>
     </div>
-  	<div id="divgcode">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-  	<div id="divconfig"></div>
+  	<div id="divgcode">
+      Upload your gcode file:
+      <br />
+      <br />
+      <input type="file">
+    </div>
+  	<div id="divconfig">
+      <ul class="Nav Nav_Small MainNav">
+        <li class="MainNav-Button" id="Save"><a href="#">Save</a></li><br />
+      </ul>
+      <div id="divconfigitems">
+      </div>
+
+    </div>
+  	<div id="divabout">
+      <p>Web interface for pycnc</p>
+      <a href="https://github.com/masterzion/pycncweb"> https://github.com/masterzion/pycncweb </a>
+      <hr>
+      <p>References:</p>
+      <p>A Pen created at CodePen.io. You can find this one at https://codepen.io/jnowland/pen/iexDp.</p>
+      <p>In an attempt to sharpen my pseudo element abuse I tried to recreate this:</p>
+      <p>http://dribbble.com/shots/711443-Light-Dark?list=likes</p>
+    </div>
+  </div>
   </div>
 
+  <div id="view">
+asdasdas
+asdasdas
+asdasdas
+  </div>
 
 
 

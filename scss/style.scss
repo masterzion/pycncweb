@@ -284,3 +284,31 @@ p {
 	margin-top:2em;
   margin-bottom:2em;
 }
+
+
+.spinner {
+  background: #a6a6a6;
+}
+
+#panel {
+	width:40%;
+  float: left;
+  height: 80%;
+}
+
+#view {
+	width:40%;
+  margin-left: 5px;
+  float: left;
+}
+
+#divconfigitems {
+  height: 70%;
+  margin-top: 20px;
+  overflow-y: scroll;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 0px;
+}

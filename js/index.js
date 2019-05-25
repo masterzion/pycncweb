@@ -1,5 +1,7 @@
-$( "#tabs" ).tabs();
-$( "#tabs" ).tabs().find('.ui-tabs-nav li').off('keydown')
+$( "#tabs" ).tabs({ heightStyle: "auto"}).find('.ui-tabs-nav li').off('keydown')
+$(".spinner").spinner();
+$( ".checkbox" ).checkboxradio();
+
 
 
 
@@ -12,21 +14,23 @@ $.getJSON({
 
 		$.each( val, function( key2, val2 ) {
 			if (val2 == "int") {
-				str="<input type='number' class='spinner'>"
+				str="</span><input type='number' class='spinner'>"
 			} else {
-				str="<input type='checkbox'>"
+				str="<input type='checkbox' class='checkbox'></span>"
 			}
-	    items.push( "<li id='" + key + "'>" + key +" : "+str+"</li>" );
+	    items.push( "<li id='" + key2 + "'><span class='configitem'>" + key2.replace(/_/g, ' ').toLowerCase() +":"+str+"</li>" );
 	  });
     items.push( "</ul><hr>" );
 	});
 
-  $("#divconfig" ).html(items.join( "" ));
+
+
+  $("#divconfigitems" ).html(items.join( "" ));
 }).fail(function (xhr, status, error) {
     alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
 });
 
-$(".spinner").spinner();
+
 
 
 
