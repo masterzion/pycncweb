@@ -1,0 +1,70 @@
+"config" {
+  "CONTROL" : {
+      "SPINDLE_PWM_PIN":"int",
+      "FAN_PIN":"int",
+      "EXTRUDER_HEATER_PIN":"int",
+      "BED_HEATER_PIN":"int",
+      "EXTRUDER_TEMPERATURE_SENSOR_CHANNEL":"int",
+      "BED_TEMPERATURE_SENSOR_CHANNEL":"int",
+      "STEPPERS_ENABLE_PIN":"int",
+      "LED":"int",
+      "AUTO_VELOCITY_ADJUSTMENT":"bool",
+      "AUTO_FAN_ON":"bool",
+      "INSTANT_RUN":"bool",
+      "STEPPER_PULSE_LENGTH_US":"int",
+      "STEPPER_MAX_ACCELERATION_MM_PER_S2":"int",
+      "SPINDLE_MAX_RPM":"int",
+  },
+  "AXIS" : {
+      "CALIBRATION_VELOCITY_MM_PER_MIN":"int",
+
+      "STEPPER_STEP_PIN_X":"int",
+      "STEPPER_STEP_PIN_Y":"int",
+      "STEPPER_STEP_PIN_E":"int",
+
+      "STEPPER_DIR_PIN_X":"int",
+      "STEPPER_DIR_PIN_Y":"int",
+      "STEPPER_DIR_PIN_E":"int",
+
+      "ENDSTOP_PIN_X":"int",
+      "ENDSTOP_PIN_Y":"int",
+      "ENDSTOP_PIN_Z":"int",
+
+      "ENDSTOP_INVERTED_X":"bool",
+      "ENDSTOP_INVERTED_Y":"bool",
+      "ENDSTOP_INVERTED_Z":"bool",
+
+      "MAX_VELOCITY_MM_PER_MIN_X":"int",
+      "MAX_VELOCITY_MM_PER_MIN_Y":"int",
+      "MAX_VELOCITY_MM_PER_MIN_Z":"int",
+      "MAX_VELOCITY_MM_PER_MIN_E":"int",
+      "MIN_VELOCITY_MM_PER_MIN":"int",
+
+      "STEPPER_INVERTED_X":"bool",
+      "STEPPER_INVERTED_Y":"bool",
+      "STEPPER_INVERTED_Z":"bool",
+      "STEPPER_INVERTED_E":"bool",
+
+      "STEPPER_PULSES_PER_MM_X":"int",
+      "STEPPER_PULSES_PER_MM_Y":"int",
+      "STEPPER_PULSES_PER_MM_Z":"int",
+      "STEPPER_PULSES_PER_MM_E":"int",
+  },
+  "WORKPLACE":{
+
+      "TABLE_SIZE_X_MM":"int",
+      "TABLE_SIZE_Y_MM":"int",
+      "TABLE_SIZE_Z_MM":"int",
+      "TABLE_SIZE_E_MM":"int",
+
+      "TABLE_SIZE_X_MIN_MM":"int",
+      "TABLE_SIZE_Y_MIN_MM":"int",
+      "TABLE_SIZE_Z_MIN_MM":"int",
+      "TABLE_SIZE_E_MIN_MM":"int",
+  },
+  "TEMPERATURE":{
+      "EXTRUDER_MAX_TEMPERATURE":"int",
+      "BED_MAX_TEMPERATURE":"int",
+      "MIN_TEMPERATURE":"int",
+  }
+}
