@@ -1,4 +1,6 @@
-var CNC_AXIS = {};///////////////////////////////////////////////////////////////////////////////
+var CNC_AXIS = {};
+$( "#tabs" ).tabs();
+$( "#tabs" ).tabs().find('.ui-tabs-nav li').off('keydown')
 
 CNC_AXIS['x']=0;
 CNC_AXIS['y']=0;
