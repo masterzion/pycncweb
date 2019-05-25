@@ -249,6 +249,16 @@ h3 {
 	letter-spacing: 2px;
 }
 
+.configheader {
+	@include text-shadow(rgba(#000,1)  -1px -2px 0px 0px);
+	font-size:32;
+	color:#a6a6a6;
+	margin-bottom:9em;
+	font-weight: normal;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
 .TextLink {
 	text-decoration: none;
 	color:#a6a6a6;

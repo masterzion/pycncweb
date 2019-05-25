@@ -1,10 +1,34 @@
-var CNC_AXIS = {};
 $( "#tabs" ).tabs();
 $( "#tabs" ).tabs().find('.ui-tabs-nav li').off('keydown')
 
-CNC_AXIS['x']=0;
-CNC_AXIS['y']=0;
-CNC_AXIS['z']=0;
+
+
+$.getJSON({
+    url: "/js/config.json"
+}).done(function (data, status, xhr) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    items.push( "<p class='configheader'>" + key + "</p><ul>" );
+
+		$.each( val, function( key2, val2 ) {
+			if (val2 == "int") {
+				str="<input type='number' class='spinner'>"
+			} else {
+				str="<input type='checkbox'>"
+			}
+	    items.push( "<li id='" + key + "'>" + key +" : "+str+"</li>" );
+	  });
+    items.push( "</ul><hr>" );
+	});
+
+  $("#divconfig" ).html(items.join( "" ));
+}).fail(function (xhr, status, error) {
+    alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+});
+
+$(".spinner").spinner();
+
+
 
 
 //JS to make it work on single page/codepen
@@ -35,7 +59,6 @@ $(document).keydown(function(e) {
         break;
 
         case 38: // up
-            CNC_AXIS['x']+=1;
             $("#x_up").mousedown();
         break;
 
@@ -56,7 +79,6 @@ $(document).keydown(function(e) {
         break;
         default: return; // exit this handler for other keys
     }
-    console.log(CNC_AXIS);
     e.preventDefault(); // prevent the default action (scroll / move caret)
 });
 
@@ -88,6 +110,5 @@ $(document).keyup(function(e) {
         break;
         default: return; // exit this handler for other keys
     }
-    console.log(CNC_AXIS);
     e.preventDefault(); // prevent the default action (scroll / move caret)
 });
