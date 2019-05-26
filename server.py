@@ -2,10 +2,12 @@ import configparser, json, html
 
 import tornado.ioloop
 import tornado.web
+import cnc.config
 import cnc.logging_config as logging_config
 from cnc.gcode import GCode, GCodeException
 from cnc.gmachine import GMachine, GMachineException
 
+logging_config.debug_enable()
 
 WEB_PORT=8080
 
@@ -14,6 +16,8 @@ configvars = 'js/config.json'
 
 gcodetext=[]
 gindex=0
+
+machine = GMachine()
 
 class gcodefile(tornado.web.RequestHandler):
     def post(self):
@@ -82,7 +86,15 @@ class reset(tornado.web.RequestHandler):
 class coordinates(tornado.web.RequestHandler):
     def get(self):
         self.set_header('Content-type','application/json')
-        dataday = json.dumps( machine.coordinates() )
+        coord=machine.coordinates()
+        obj={
+            "x" : coord[0],
+            "y" : coord[1],
+            "z" : coord[2],
+            "e" : coord[3]
+        }
+#        print (obj);
+        self.write( json.dumps( obj ) )
 
     def post(self):
         config = configparser.ConfigParser()

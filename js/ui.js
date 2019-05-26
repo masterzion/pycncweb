@@ -149,11 +149,6 @@ $(function() {
     setTimeout(about, 500);
   }
 
-  $('.gcode_examples a').on('click', function(event) {
-    GCodeImporter.importPath($(this).attr('href'), onGCodeLoaded);
-    return false;
-  })
-
   // Drop files from desktop onto main page to import them.
   $('body').on('dragover', function(event) {
 
