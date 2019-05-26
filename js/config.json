@@ -1,72 +1,74 @@
 {
-  "TEMPERATURE":{
-      "EXTRUDER_MAX_TEMPERATURE":"int",
-      "BED_MAX_TEMPERATURE":"int",
-      "MIN_TEMPERATURE":"int"
+  "temperature":{
+      "extruder_max_temperature":"int",
+      "bed_max_temperature":"int",
+      "min_temperature":"int"
   },
-  "WORKPLACE":{
+  "workplace":{
 
-      "TABLE_SIZE_X_MM":"int",
-      "TABLE_SIZE_Y_MM":"int",
-      "TABLE_SIZE_Z_MM":"int",
-      "TABLE_SIZE_E_MM":"int",
+      "table_size_x_mm":"int",
+      "table_size_y_mm":"int",
+      "table_size_z_mm":"int",
+      "table_size_e_mm":"int",
 
-      "TABLE_SIZE_X_MIN_MM":"int",
-      "TABLE_SIZE_Y_MIN_MM":"int",
-      "TABLE_SIZE_Z_MIN_MM":"int",
-      "TABLE_SIZE_E_MIN_MM":"int"
+      "table_size_x_min_mm":"int",
+      "table_size_y_min_mm":"int",
+      "table_size_z_min_mm":"int",
+      "table_size_e_min_mm":"int"
   },
 
-    "CONTROL" : {
-        "SPINDLE_PWM_PIN":"int",
-        "FAN_PIN":"int",
-        "EXTRUDER_HEATER_PIN":"int",
-        "BED_HEATER_PIN":"int",
-        "EXTRUDER_TEMPERATURE_SENSOR_CHANNEL":"int",
-        "BED_TEMPERATURE_SENSOR_CHANNEL":"int",
-        "STEPPERS_ENABLE_PIN":"int",
-        "LED":"int",
-        "STEPPER_PULSE_LENGTH_US":"int",
-        "STEPPER_MAX_ACCELERATION_MM_PER_S2":"int",
-        "SPINDLE_MAX_RPM":"int",
-        "AUTO_VELOCITY_ADJUSTMENT":"bool",
-        "AUTO_FAN_ON":"bool",
-        "INSTANT_RUN":"bool"
+    "control" : {
+        "spindle_pwm_pin":"int",
+        "fan_pin":"int",
+        "extruder_heater_pin":"int",
+        "bed_heater_pin":"int",
+        "extruder_temperature_sensor_channel":"int",
+        "bed_temperature_sensor_channel":"int",
+        "steppers_enable_pin":"int",
+        "led":"int",
+        "stepper_pulse_length_us":"int",
+        "stepper_max_acceleration_mm_per_s2":"int",
+        "spindle_max_rpm":"int",
+        "auto_velocity_adjustment":"bool",
+        "auto_fan_on":"bool",
+        "instant_run":"bool"
     },
-    "AXIS" : {
-        "CALIBRATION_VELOCITY_MM_PER_MIN":"int",
+    "axis" : {
+        "calibration_velocity_mm_per_min":"int",
 
-        "STEPPER_STEP_PIN_X":"int",
-        "STEPPER_STEP_PIN_Y":"int",
-        "STEPPER_STEP_PIN_E":"int",
+        "stepper_step_pin_x":"int",
+        "stepper_step_pin_y":"int",
+        "stepper_step_pin_z":"int",
+        "stepper_step_pin_e":"int",
 
-        "STEPPER_DIR_PIN_X":"int",
-        "STEPPER_DIR_PIN_Y":"int",
-        "STEPPER_DIR_PIN_E":"int",
+        "stepper_dir_pin_x":"int",
+        "stepper_dir_pin_y":"int",
+        "stepper_dir_pin_z":"int",
+        "stepper_dir_pin_e":"int",
 
-        "ENDSTOP_PIN_X":"int",
-        "ENDSTOP_PIN_Y":"int",
-        "ENDSTOP_PIN_Z":"int",
+        "endstop_pin_x":"int",
+        "endstop_pin_y":"int",
+        "endstop_pin_z":"int",
 
-        "MAX_VELOCITY_MM_PER_MIN_X":"int",
-        "MAX_VELOCITY_MM_PER_MIN_Y":"int",
-        "MAX_VELOCITY_MM_PER_MIN_Z":"int",
-        "MAX_VELOCITY_MM_PER_MIN_E":"int",
-        "MIN_VELOCITY_MM_PER_MIN":"int",
+        "max_velocity_mm_per_min_x":"int",
+        "max_velocity_mm_per_min_y":"int",
+        "max_velocity_mm_per_min_z":"int",
+        "max_velocity_mm_per_min_e":"int",
+        "min_velocity_mm_per_min":"int",
 
-        "STEPPER_PULSES_PER_MM_X":"int",
-        "STEPPER_PULSES_PER_MM_Y":"int",
-        "STEPPER_PULSES_PER_MM_Z":"int",
-        "STEPPER_PULSES_PER_MM_E":"int",
+        "stepper_pulses_per_mm_x":"int",
+        "stepper_pulses_per_mm_y":"int",
+        "stepper_pulses_per_mm_z":"int",
+        "stepper_pulses_per_mm_e":"int",
 
-        "STEPPER_INVERTED_X":"bool",
-        "STEPPER_INVERTED_Y":"bool",
-        "STEPPER_INVERTED_Z":"bool",
-        "STEPPER_INVERTED_E":"bool",
+        "stepper_inverted_x":"bool",
+        "stepper_inverted_y":"bool",
+        "stepper_inverted_z":"bool",
+        "stepper_inverted_e":"bool",
 
-        "ENDSTOP_INVERTED_X":"bool",
-        "ENDSTOP_INVERTED_Y":"bool",
-        "ENDSTOP_INVERTED_Z":"bool"
+        "endstop_inverted_x":"bool",
+        "endstop_inverted_y":"bool",
+        "endstop_inverted_z":"bool"
 
     }
 }
