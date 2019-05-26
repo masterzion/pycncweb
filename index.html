@@ -3,15 +3,41 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Dribble Button CSS Rebound</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+  <title>PyCNC Web GUI</title>
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+      <link rel="stylesheet" href="css/reset.min.css">
 
 	    <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="jquery-ui/jquery-ui.theme.css">
+
+      <script src="js/modernizr.min.js" type="text/javascript"></script>
+      <script src="jquery-ui/external/jquery/jquery.js"></script>
+      <script src="lib/bootstrap-modal.js"></script>
+      <script src="lib/sugar-1.2.4.min.js"></script>
+      <script src="lib/three.js"></script>
+      <script src="lib/TrackballControls.js"></script>
+
+      <script src="js/ShaderExtras.js"></script>
+      <script src="js/postprocessing/EffectComposer.js"></script>
+      <script src="js/postprocessing/MaskPass.js"></script>
+      <script src="js/postprocessing/RenderPass.js"></script>
+      <script src="js/postprocessing/ShaderPass.js"></script>
+      <script src="js/postprocessing/BloomPass.js"></script>
+
+      <script src="js/Stats.js"></script>
+      <script src="js/dat.gui.min.js"></script>
+      <!-- Custom code -->
+      <script type="text/javascript" src="js/gcode_model.js"></script>
+      <script type="text/javascript" src="js/gcode_parser.js"></script>
+      <script type="text/javascript" src="js/gcode_interpreter.js"></script>
+      <script type="text/javascript" src="js/gcode_importer.js"></script>
+      <script type="text/javascript" src="js/gcode_renderer.js"></script>
+      <script src="js/renderer.js"></script>
+      <script src="js/ui.js"></script>
+
+
 
 
 
@@ -30,7 +56,7 @@
   		<li><a href="#divabout">About</a></li>
   	</ul>
   	<div id="divnavigation">
-      <div class="container">
+      <div class="controlcontainer">
       	<h3>X</h3>
       	<ul class="Nav Nav_Small MainNav">
       		<li class="MainNav-Button" id="x_up"><a href="#">&#8593;</a></li><br />
@@ -43,7 +69,7 @@
       		<li class="MainNav-Button" id="y_up"><a href="#">&#8594;</a></li>
       	</ul>
       	<hr>
-              <h3>Z</h3>
+        <h3>Z</h3>
       	<ul class="Nav Nav_Small MainNav">
       		<li class="MainNav-Button" id="z_up"><a href="#">&#8593;</a></li><br />
       		<li class="MainNav-Button" id="z_down"><a href="#">&#8595;</a></li>
@@ -51,10 +77,15 @@
       </div>
     </div>
   	<div id="divgcode">
-      Upload your gcode file:
-      <br />
-      <br />
-      <input type="file">
+      <div class="modal-body">
+        <h4>Examples</h4>
+        <ul class="gcode_examples">
+          <li><a href="examples/15mm_cube.gcode">15mm_cube.gcode</a></li>
+          <li><a href="examples/octocat.gcode">octocat.gcode</a></li>
+          <li><a href="examples/part.gcode">part.gcode</a></li>
+        </ul>
+        <p>To view your own model, drag a gcode file from your desktop and drop it in this window.</p>
+      </div>
     </div>
   	<div id="divconfig">
       <ul class="Nav Nav_Small MainNav">
@@ -76,17 +107,16 @@
   </div>
   </div>
 
-  <div id="view">
-asdasdas
-asdasdas
-asdasdas
-  </div>
 
 
+  <div id="renderArea"></div>
 
-<script src="jquery-ui/external/jquery/jquery.js"></script>
-<script src="jquery-ui/jquery-ui.min.js"></script>
-<script  src="js/index.js"></script>
+
+  <script src="jquery-ui/jquery-ui.min.js"></script>
+
+  <script src="lib/modernizr.custom.93389.js"></script>
+  <script src="js/index.js"></script>
+
 
 </body>
 </html>

@@ -1,8 +1,13 @@
-Web interface for pycnc
----
+# Web interface for pycnc
+
+This is a web interface for a modified version of PyCNC using gcode-viewer
+
+
+![Screenshot](/doc/screen.png)
 
 
 References:
-A Pen created at CodePen.io. You can find this one at https://codepen.io/jnowland/pen/iexDp.
-In an attempt to sharpen my pseudo element abuse I tried to recreate this:
-http://dribbble.com/shots/711443-Light-Dark?list=likes
+my pycnc version:  https://github.com/masterzion/PyCNC
+original:  https://github.com/Nikolay-Kha/PyCNC
+GUI design based on: http://dribbble.com/shots/711443-Light-Dark?list=likes
+Gcode viewer: http://jherrm.com/gcode-viewer/

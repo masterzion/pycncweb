@@ -286,6 +286,12 @@ p {
 }
 
 
+ul li span {
+	float: left;
+	width: 100%;
+  margin-top: 10px;
+}
+
 .spinner {
   background: #a6a6a6;
 }
@@ -296,7 +302,7 @@ p {
   height: 80%;
 }
 
-#view {
+#renderArea {
 	width:40%;
   margin-left: 5px;
   float: left;

@@ -116,3 +116,5 @@ $(document).keyup(function(e) {
     }
     e.preventDefault(); // prevent the default action (scroll / move caret)
 });
+
+$("body").css("overflow", "hidden");

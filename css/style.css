@@ -67,9 +67,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   position: absolute;
 }
 
-.container {
+.controlcontainer {
   text-align: center;
-  padding: 3.75em 0;
+  padding: 0 0;
 }
 
 .Nav {
@@ -315,7 +315,7 @@ ul li span {
   height: 80%;
 }
 
-#view {
+#renderArea {
 	width:40%;
   margin-left: 5px;
   float: left;
