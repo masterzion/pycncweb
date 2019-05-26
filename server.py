@@ -1,15 +1,26 @@
+import configparser, json, html
 
 import tornado.ioloop
 import tornado.web
+import cnc.logging_config as logging_config
+from cnc.gcode import GCode, GCodeException
+from cnc.gmachine import GMachine, GMachineException
 
-import configparser, json, html
 
 WEB_PORT=8080
 
 configFilePath = '/etc/pycnc.conf'
 configvars = 'js/config.json'
 
+gcodetext=[]
+gindex=0
 
+class gcodefile(tornado.web.RequestHandler):
+    def post(self):
+        str=self.request.body.decode('utf-8')
+        gcodetext=str.split('\n')
+        print(gcodetext)
+        self.write( 'ok' )
 
 class config(tornado.web.RequestHandler):
     def get(self):
@@ -41,12 +52,13 @@ class config(tornado.web.RequestHandler):
             config[value] = json_data[value]
         with open(configFilePath, 'w') as configfile:
             config.write(configfile)
+#        machine.reloadconfig()
         self.write( 'ok' )
 
-'''
-configParser = configparser.RawConfigParser()
-configParser.read(configFilePath)
-machine.coordinates()
+class gcodeindex(tornado.web.RequestHandler):
+    def get(self):
+        self.write( str( gindex ) )
+
 
 def do_line(line):
     try:
@@ -59,7 +71,24 @@ def do_line(line):
     else:
         return 'OK'
     return True
-'''
+
+
+
+class reset(tornado.web.RequestHandler):
+    def get(self):
+        machine.reset()
+        self.write( 'ok' )
+
+class coordinates(tornado.web.RequestHandler):
+    def get(self):
+        self.set_header('Content-type','application/json')
+        dataday = json.dumps( machine.coordinates() )
+
+    def post(self):
+        config = configparser.ConfigParser()
+        json_data = json.loads(self.request.body)
+        do_line("x"+str(json_data.x)+" y"+str(json_data.y)+" z"+str(json_data.z))
+        self.write( 'ok' )
 
 
 class NoCacheStaticFileHandler(tornado.web.StaticFileHandler):
@@ -69,6 +98,9 @@ class NoCacheStaticFileHandler(tornado.web.StaticFileHandler):
 
 application = tornado.web.Application([
     (r"/config", config),
+    (r"/gcodefile", gcodefile),
+    (r"/gcodeindex", gcodeindex),
+    (r"/coordinates", coordinates),
 #    (r"/", LoginHandler),
     (r"/(.*)",  NoCacheStaticFileHandler, {"path": "./", "default_filename": "index.html"}),
 ], cookie_secret="MY_BIG_SECRET")

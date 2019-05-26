@@ -159,17 +159,10 @@ function savedata() {
         async: false,
         data: JSON.stringify(data),
         success: function () {
-        console.log("Thanks!");
+        console.log("saved");
         }
     })
 
   });
 
 }
-
-
-/*
-setInterval(function(){
-    console.log();
-}, 1000);
-*/

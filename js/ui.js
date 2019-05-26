@@ -100,9 +100,7 @@ function onGCodeLoaded(gcode) {
       var gcodeObj = gr.render(gm);
       guiControllers.gcodeIndex.max(gr.viewModels.length - 1);
       guiControllers.gcodeIndex.setValue(0);
-      guiControllers.animate.setValue(false);
-
-
+//      guiControllers.animate.setValue(false);
 
       camera.position.z = 500;
       camera.position.y = -1500;
@@ -169,6 +167,20 @@ $(function() {
     event.preventDefault();
 
     FileIO.load(event.originalEvent.dataTransfer.files, function(gcode) {
+
+      $.ajax
+      ({
+          type: "POST",
+          url: '/gcodefile',
+          dataType: 'json',
+          contentType: "application/json; charset=utf-8",
+          async: false,
+          data: gcode,
+          success: function () {
+          console.log("uploaded!");
+          }
+      })
+
       GCodeImporter.importText(gcode, onGCodeLoaded);
     });
 
@@ -189,7 +201,9 @@ $(function() {
 
 var guiControllers = {
   gcodeIndex: undefined,
+  show: undefined,
   animate: undefined
+
 };
 function setupGui() {
 
@@ -203,13 +217,15 @@ function setupGui() {
 
     gcodeIndex:   10,
     animate: false,
+    show: true,
     speed: 0,
     color: [ 0, 128, 255 ],
 
   };
 
   guiControllers.gcodeIndex = gui.add(effectController, "gcodeIndex", 0, 1000, 1000).listen();
-  guiControllers.animate = gui.add(effectController, 'animate').listen();
+//  guiControllers.animate = gui.add(effectController, 'animate').listen();
+  guiControllers.show = gui.add(effectController, 'show').listen();
   // gui.add(effectController, 'speed', { Slow: 1, Normal: 2, Fast: 5 }, "Normal" );
   // gui.addColor(effectController, 'color');
 
@@ -220,3 +236,15 @@ function setupGui() {
     }
   });
 };
+
+setInterval(function(){
+  if(effectController.show) {
+
+    $.getJSON({
+        url: "/gcodeindex"
+    }).done(function (data, status, xhr) {
+        console.log(data);
+        guiControllers.gcodeIndex.setValue(data);
+    });
+  }
+}, 500);
