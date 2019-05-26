@@ -1,11 +1,4 @@
 
-var CNC_AXIS = {};///////////////////////////////////////////////////////////////////////////////
-
-CNC_AXIS['x']=0;
-CNC_AXIS['y']=0;
-CNC_AXIS['z']=0;
-
-
 $(document).keydown(function(e) {
     switch(e.which) {
         case 37: // left
@@ -36,14 +29,6 @@ $(document).keydown(function(e) {
     console.log(CNC_AXIS);
     e.preventDefault(); // prevent the default action (scroll / move caret)
 });
-
-
-setInterval(function(){
-    console.log(CNC_AXIS);
-
-
-}, 1000);
-
 
 
 // gcodeFile = new GCodeFile();

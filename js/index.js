@@ -8,17 +8,28 @@ $( ".checkbox" ).checkboxradio();
 $.getJSON({
     url: "/js/config.json"
 }).done(function (data, status, xhr) {
+
+  $.getJSON({
+      url: "/config"
+  }).done(function (datacontent, statuscontent, xhr) {
+
   var items = [];
   $.each( data, function( key, val ) {
     items.push( "<p class='configheader'>" + key + "</p><ul>" );
 
 		$.each( val, function( key2, val2 ) {
 			if (val2 == "int") {
-				str="</span><input type='number' class='spinner'>"
+				str="</span><input type='number' class='spinner' id='"+key2+"' value='"+datacontent[key][key2]+"'>"
 			} else {
-				str="<input type='checkbox' class='checkbox'></span>"
+        if ( datacontent[key][key2] ) {
+           strchecked="checked";
+        } else {
+          strchecked="";
+        }
+
+				str="<input type='checkbox' class='checkbox'  id='"+key2+"' "+strchecked+"></span>"
 			}
-	    items.push( "<li id='" + key2 + "'><span class='configitem'>" + key2.replace(/_/g, ' ').toLowerCase() +":"+str+"</li>" );
+	    items.push( "<li><span class='configitem'>" + key2.replace(/_/g, ' ').toLowerCase() +":"+str+"</li>" );
 	  });
     items.push( "</ul><hr>" );
 	});
@@ -26,6 +37,9 @@ $.getJSON({
 
 
   $("#divconfigitems" ).html(items.join( "" ));
+}).fail(function (xhr2, status2, error2) {
+      alert("Result: " + status2 + " " + error2 + " " + xhr2.status + " " + xhr2.statusText)
+  });
 }).fail(function (xhr, status, error) {
     alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
 });
@@ -118,3 +132,44 @@ $(document).keyup(function(e) {
 });
 
 $("body").css("overflow", "hidden");
+
+
+function savedata() {
+  $.getJSON({
+      url: "/js/config.json"
+  }).done(function (data, status, xhr) {
+    $.each( data, function( key, val ) {
+  		$.each( val, function( key2, val2 ) {
+  			if (val2 == "int") {
+  				data[key][key2]=$("#"+key2).val();
+  			} else {
+          data[key][key2]=$("#"+key2).prop( "checked" );
+  			}
+          console.log(key2+':'+data[key][key2]);
+  	  });
+  	});
+
+    console.log(data);
+    $.ajax
+    ({
+        type: "POST",
+        url: '/config',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: JSON.stringify(data),
+        success: function () {
+        console.log("Thanks!");
+        }
+    })
+
+  });
+
+}
+
+
+/*
+setInterval(function(){
+    console.log();
+}, 1000);
+*/
