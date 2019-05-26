@@ -18,6 +18,7 @@ gcodetext=[]
 gindex=0
 
 machine = GMachine()
+cancelprint = False;
 
 class gcodefile(tornado.web.RequestHandler):
     def post(self):
@@ -56,7 +57,7 @@ class config(tornado.web.RequestHandler):
             config[value] = json_data[value]
         with open(configFilePath, 'w') as configfile:
             config.write(configfile)
-#        machine.reloadconfig()
+        machine.reloadconfig()
         self.write( 'ok' )
 
 class gcodeindex(tornado.web.RequestHandler):

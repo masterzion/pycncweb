@@ -1,36 +1,3 @@
-
-$(document).keydown(function(e) {
-    switch(e.which) {
-        case 37: // left
-              CNC_AXIS['y']-=1;
-        break;
-
-        case 38: // up
-            CNC_AXIS['x']+=1;
-        break;
-
-        case 39: // right
-              CNC_AXIS['y']+=1;
-        break;
-
-        case 40: // down
-            CNC_AXIS['x']-=1;
-        break;
-
-        case 33: // page up
-            CNC_AXIS['z']-=1;
-        break;
-
-        case 34: // page down
-            CNC_AXIS['z']+=1;
-        break;
-        default: return; // exit this handler for other keys
-    }
-    console.log(CNC_AXIS);
-    e.preventDefault(); // prevent the default action (scroll / move caret)
-});
-
-
 // gcodeFile = new GCodeFile();
 
 // gcodeFile.codes // doesn't include comments
