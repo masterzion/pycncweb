@@ -204,9 +204,9 @@ setInterval(function(){
         $("#posZ").html(data.Z);
         $("#posE").html(data.E);
         if(effectController.show) {
-          Jump(data.gcodeindex);
           guiControllers.gcodeIndex.setValue(data.gcodeindex);
         }
+        Jump(guiControllers.gcodeIndex.getValue());
     });
 
 }, 500);
