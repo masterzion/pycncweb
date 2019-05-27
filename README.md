@@ -3,8 +3,11 @@
 This is a web interface for a modified version of PyCNC using gcode-viewer
 
 
-![Screenshot](https://github.com/masterzion/pycncweb/blob/master/doc/screen.png)
+![Screenshot1](https://github.com/masterzion/pycncweb/blob/master/doc/screen1.png)
 
+![Screenshot2](https://github.com/masterzion/pycncweb/blob/master/doc/screen2.png)
+
+![Screenshot3](https://github.com/masterzion/pycncweb/blob/master/doc/screen3.png)
 
 # References:
 
