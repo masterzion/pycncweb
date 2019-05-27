@@ -2,8 +2,21 @@ $( "#tabs" ).tabs({ heightStyle: "auto"}).find('.ui-tabs-nav li').off('keydown')
 $(".spinner").spinner();
 $( ".checkbox" ).checkboxradio();
 
+$( "#divabout" ).dialog({
+   autoOpen: false,
+   modal: true,
+   open: function(){
+      jQuery('.ui-widget-overlay').bind('click',function(){
+         dialogopen.dialog('close');
+      });
+   },
+   width: "70%",
+   maxWidth: "768px"
+});
 
-
+function openabout(){
+  $("#divabout").dialog("open");
+}
 
 $.getJSON({
     url: "/js/config.json"

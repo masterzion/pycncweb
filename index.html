@@ -57,7 +57,7 @@
   		<li><a href="#divnavigation">Manual</a></li>
   		<li><a href="#divconfig">Configuration</a></li>
   		<li><a href="#divgcode">Execute Gcode</a></li>
-  		<li><a href="#divabout">About</a></li>
+<!--  		<li><a href="#divabout">About</a></li> -->
   	</ul>
   	<div id="divnavigation">
       <div class="controlcontainer">
@@ -66,33 +66,50 @@
       		<li class="MainNav-Button" id="x_up"><a href="#">&#8593;</a></li><br />
       		<li class="MainNav-Button" id="x_down"><a href="#">&#8595;</a></li>
       	</ul>
-      	<hr>
+        <br /><br />
       	<h3>Y</h3>
       	<ul class="Nav Nav_Small MainNav">
       		<li class="MainNav-Button" id="y_down"><a href="#">&#8592;</a></li>
       		<li class="MainNav-Button" id="y_up"><a href="#">&#8594;</a></li>
       	</ul>
-      	<hr>
+        <br /><br />
         <h3>Z</h3>
       	<ul class="Nav Nav_Small MainNav">
       		<li class="MainNav-Button" id="z_up"><a href="#">&#8593;</a></li><br />
       		<li class="MainNav-Button" id="z_down"><a href="#">&#8595;</a></li>
       	</ul>
+        <hr>
+        <h3>Actions</h3>
+      	<ul class="Nav Nav_Small MainNav">
+      		<li class="MainNav-Button" id="reset"><a href="#">Reset</a></li>
+          <li class="MainNav-Button" id="about"><a href="#" onclick="openabout()">About</a></li>
+      	</ul>
       </div>
     </div>
   	<div id="divgcode">
       <div class="modal-body">
-        <h4>Examples</h4>
+        <h4>G-Code</h4>
         <p>To view your own model, drag a gcode file from your desktop and drop it in this window.</p>
+        <div class="controlcontainer">
+          <ul class="Nav Nav_Small MainNav">
+            <li class="MainNav-Button" id="Play"><a href="#">&#9658;</a></li>
+            <li class="MainNav-Button" id="Pause"><a href="#">&#9616;&nbsp;&#9612;</a></li>
+            <li class="MainNav-Button" id="Stop"><a href="#">&#9724;</a></li>
+          </ul>
+        </div>
+        <textarea rows="15" cols="34" id="gcodetext" readonly></textarea>
       </div>
     </div>
   	<div id="divconfig">
+      <div class="controlcontainer">
       <ul class="Nav Nav_Small MainNav">
         <li class="MainNav-Button"><a href="#"  onclick="savedata()">Save</a></li><br />
       </ul>
-      <div id="divconfigitems"></div>
+    </div>
+    <div id="divconfigitems"></div>
 
     </div>
+
   	<div id="divabout">
       <h1>Web interface for pycnc</h1>
       <p>This is a web interface for a modified version of PyCNC using gcode-viewer.</p>
@@ -104,6 +121,7 @@
       <p><a href="http://dribbble.com/shots/711443-Light-Dark?list=likes"  target="_blank">Light & Dark theme by DKO</a></p>
       <p><a href="http://jherrm.com/gcode-viewer/"  target="_blank">Gcode viewer</a></p>
     </div>
+
   </div>
   </div>
 

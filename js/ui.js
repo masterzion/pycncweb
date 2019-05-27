@@ -142,7 +142,7 @@ $(function() {
           console.log("uploaded!");
           }
       })
-
+      $('#gcodetext').text(gcode);
       GCodeImporter.importText(gcode, onGCodeLoaded);
     });
 
