@@ -142,7 +142,6 @@ $(function() {
           console.log("uploaded!");
           }
       })
-      $('#gcodetext').text(gcode);
       GCodeImporter.importText(gcode, onGCodeLoaded);
     });
 
@@ -199,14 +198,28 @@ function setupGui() {
   });
 };
 
-setInterval(function(){
-  if(effectController.show) {
+function Jump(line)
+{
+  var ta = document.getElementById("gcodetext");
+  var lineHeight = ta.clientHeight / ta.rows;
+  var jump = (line - 1) * lineHeight;
+  ta.scrollTop = jump;
+}
 
+
+setInterval(function(){
     $.getJSON({
-        url: "/gcodeindex"
+        url: "/positions"
     }).done(function (data, status, xhr) {
         console.log(data);
-        guiControllers.gcodeIndex.setValue(data);
+        $("#posX").html(data.X);
+        $("#posY").html(data.Y);
+        $("#posZ").html(data.Z);
+        $("#posE").html(data.E);
+        if(effectController.show) {
+          Jump(data.gcodeindex);
+          guiControllers.gcodeIndex.setValue(data.gcodeindex);
+        }
     });
-  }
+
 }, 500);

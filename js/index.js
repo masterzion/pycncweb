@@ -2,6 +2,8 @@ $( "#tabs" ).tabs({ heightStyle: "auto"}).find('.ui-tabs-nav li').off('keydown')
 $(".spinner").spinner();
 $( ".checkbox" ).checkboxradio();
 
+
+
 $( "#divabout" ).dialog({
    autoOpen: false,
    modal: true,
@@ -28,7 +30,7 @@ $.getJSON({
 
   var items = [];
   $.each( data, function( key, val ) {
-    items.push( "<p class='configheader'>" + key + "</p><ul>" );
+    items.push( "<p class='configheader'>" + key.toUpperCase() + "</p><ul>" );
 
 		$.each( val, function( key2, val2 ) {
 			if (val2 == "int") {
@@ -84,59 +86,67 @@ MainNav.on('click', function(event){
 
 
 $(document).keydown(function(e) {
-    switch(e.which) {
-        case 37: // left
-            $("#y_down").mousedown();
-        break;
+    if ( $('#tabs').tabs('option','active') == 0 ) {
+      switch(e.which) {
+          case 37: // left
+              $("#y_down").mousedown();
+          break;
 
-        case 38: // up
-            $("#x_up").mousedown();
-        break;
+          case 38: // up
+              $("#x_up").mousedown();
+          break;
 
-        case 39: // right
-            $("#y_up").mousedown();
-        break;
+          case 39: // right
+              $("#y_up").mousedown();
+          break;
 
-        case 40: // down
-            $("#x_down").mousedown();
-        break;
+          case 40: // down
+              $("#x_down").mousedown();
+          break;
 
-        case 33: // page up
-            $("#z_up").mousedown();
-        break;
+          case 33: // page up
+              $("#z_up").mousedown();
+          break;
 
-        case 34: // page down
-            $("#z_down").mousedown();
-        break;
-        default: return; // exit this handler for other keys
+          case 34: // page down
+              $("#z_down").mousedown();
+          break;
+          default: return; // exit this handler for other keys
+      }
+      e.preventDefault(); // prevent the default action (scroll / move caret)
     }
-    e.preventDefault(); // prevent the default action (scroll / move caret)
 });
 
 
 $(document).keyup(function(e) {
     switch(e.which) {
         case 37: // left
+            $("#y_down").click();
             $("#y_down").mouseup();
         break;
 
         case 38: // up
+            $("#x_up").click();
             $("#x_up").mouseup();
         break;
 
         case 39: // right
+            $("#y_up").click();
             $("#y_up").mouseup();
         break;
 
         case 40: // down
+            $("#x_down").click();
             $("#x_down").mouseup();
         break;
 
         case 33: // page up
+            $("#z_up").click();
             $("#z_up").mouseup();
         break;
 
         case 34: // page down
+            $("#z_down").click();
             $("#z_down").mouseup();
         break;
         default: return; // exit this handler for other keys
@@ -145,7 +155,6 @@ $(document).keyup(function(e) {
 });
 
 $("body").css("overflow", "hidden");
-
 
 function savedata() {
   $.getJSON({
@@ -174,8 +183,41 @@ function savedata() {
         success: function () {
         console.log("saved");
         }
-    })
-
+    });
   });
+}
 
+
+function addpos(axis, value) {
+    data={}
+    data["add"]= {}
+    data["add"][axis] = value;
+    console.log(data);
+    $.ajax
+    ({
+        type: "POST",
+        url: '/positions',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: JSON.stringify(data),
+        success: function () {
+          console.log("addpos");
+        }
+    });
+}
+
+function reset() {
+    $.ajax
+    ({
+        type: "POST",
+        url: '/reset',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: "reset",
+        success: function () {
+          console.log("reset");
+        }
+    });
 }

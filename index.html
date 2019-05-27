@@ -60,27 +60,27 @@
   	</ul>
   	<div id="divnavigation">
       <div class="controlcontainer">
-      	<h3>X</h3>
+      	<h3>X (<span id="posX"></span>)</h3>
       	<ul class="Nav Nav_Small MainNav">
-      		<li class="MainNav-Button" id="x_up"><a href="#">&#8593;</a></li><br />
-      		<li class="MainNav-Button" id="x_down"><a href="#">&#8595;</a></li>
+      		<li class="MainNav-Button" id="x_up" onclick="addpos('X', 1)"><a href="#">&#8593;</a></li><br />
+      		<li class="MainNav-Button" id="x_down" onclick="addpos('X', -1)"><a href="#">&#8595;</a></li>
       	</ul>
         <br /><br />
-      	<h3>Y</h3>
+      	<h3>Y (<span id="posY"></span>)</h3>
       	<ul class="Nav Nav_Small MainNav">
-      		<li class="MainNav-Button" id="y_down"><a href="#">&#8592;</a></li>
-      		<li class="MainNav-Button" id="y_up"><a href="#">&#8594;</a></li>
+      		<li class="MainNav-Button" id="y_down" onclick="addpos('Y', -1)"><a href="#">&#8592;</a></li>
+      		<li class="MainNav-Button" id="y_up" onclick="addpos('Y', 1)"><a href="#">&#8594;</a></li>
       	</ul>
         <br /><br />
-        <h3>Z</h3>
+        <h3>Z (<span id="posZ"></span>)</h3>
       	<ul class="Nav Nav_Small MainNav">
-      		<li class="MainNav-Button" id="z_up"><a href="#">&#8593;</a></li><br />
-      		<li class="MainNav-Button" id="z_down"><a href="#">&#8595;</a></li>
+      		<li class="MainNav-Button" id="z_up" onclick="addpos('Z', -1)"><a href="#">&#8593;</a></li><br />
+      		<li class="MainNav-Button" id="z_down" onclick="addpos('Z', 1)"><a href="#">&#8595;</a></li>
       	</ul>
         <hr>
         <h3>Actions</h3>
       	<ul class="Nav Nav_Small MainNav">
-      		<li class="MainNav-Button" id="reset"><a href="#">Reset</a></li>
+      		<li class="MainNav-Button" id="reset"><a href="#" onclick="reset()">Reset</a></li>
           <li class="MainNav-Button" id="about"><a href="#" onclick="openabout()">About</a></li>
       	</ul>
       </div>
@@ -96,7 +96,7 @@
             <li class="MainNav-Button" id="Stop"><a href="#">&#9724;</a></li>
           </ul>
         </div>
-        <textarea rows="15" cols="34" id="gcodetext" readonly></textarea>
+        <textarea rows="15" cols="55"  id="gcodetext" readonly></textarea>
       </div>
     </div>
   	<div id="divconfig">
@@ -119,6 +119,8 @@
       <p><a href="https://github.com/Nikolay-Kha/PyCNC"  target="_blank">PyCNC original version</a></p>
       <p><a href="http://dribbble.com/shots/711443-Light-Dark?list=likes"  target="_blank">Light & Dark theme by DKO</a></p>
       <p><a href="http://jherrm.com/gcode-viewer/"  target="_blank">Gcode viewer</a></p>
+      <p><a href="https://github.com/aw20/JQueryLinedText"  target="_blank">JQueryLinedText</a></p>
+
     </div>
 
   </div>
@@ -128,7 +130,5 @@
 
   <script src="jquery-ui/jquery-ui.min.js"></script>
   <script src="js/index.js"></script>
-
-
 </body>
 </html>

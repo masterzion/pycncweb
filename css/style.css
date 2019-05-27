@@ -333,12 +333,12 @@ ul {
 }
 
 textarea {
-    background: url(http://i.imgur.com/2cOaJ.png);
+    background: #a6a6a6;
     background-attachment: local;
     background-repeat: no-repeat;
-    padding-left: 35px;
-    padding-top: 10px;
+    font-size: 0.7em !important;
     border-color:#ccc;
     resize: none;
     color: #fff;
+    margin-top: 30px;
 }

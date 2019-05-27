@@ -15,10 +15,11 @@ configFilePath = '/etc/pycnc.conf'
 configvars = 'js/config.json'
 
 gcodetext=[]
-gindex=0
+gcodeindex=0
 
 machine = GMachine()
 cancelprint = False;
+isprinting = False;
 
 class gcodefile(tornado.web.RequestHandler):
     def post(self):
@@ -60,10 +61,6 @@ class config(tornado.web.RequestHandler):
         machine.reloadconfig()
         self.write( 'ok' )
 
-class gcodeindex(tornado.web.RequestHandler):
-    def get(self):
-        self.write( str( gindex ) )
-
 
 def do_line(line):
     try:
@@ -79,30 +76,44 @@ def do_line(line):
 
 
 
-class reset(tornado.web.RequestHandler):
-    def get(self):
-        machine.reset()
-        self.write( 'ok' )
 
-class coordinates(tornado.web.RequestHandler):
+class resetpos(tornado.web.RequestHandler):
+    def post(self):
+        machine.reloadconfig()
+        self.write( "ok" )
+
+class positions(tornado.web.RequestHandler):
     def get(self):
         self.set_header('Content-type','application/json')
         coord=machine.coordinates()
         obj={
-            "x" : coord[0],
-            "y" : coord[1],
-            "z" : coord[2],
-            "e" : coord[3]
+            "X" : coord[0],
+            "Y" : coord[1],
+            "Z" : coord[2],
+            "E" : coord[3],
+            "gcodeindex" : (gcodeindex+0)
         }
 #        print (obj);
         self.write( json.dumps( obj ) )
 
     def post(self):
-        config = configparser.ConfigParser()
-        json_data = json.loads(self.request.body)
-        do_line("x"+str(json_data.x)+" y"+str(json_data.y)+" z"+str(json_data.z))
-        self.write( 'ok' )
-
+        if not isprinting:
+            config = configparser.ConfigParser()
+            json_data = json.loads(self.request.body)
+            line="G1"
+            print(json_data)
+            if 'add' in json_data:
+                coord=machine.coordinates()
+                for key, val in enumerate(['X', 'Y', 'Z', 'E']):
+                    if val in json_data['add']:
+                        line+=" "+val+str(coord[key]+json_data['add'][val])
+            else:
+                for key, val in enumerate(json_data['pos']):
+                    line+=" "+val+str(json_data['pos'][val])
+            do_line(line)
+            self.write( 'ok' )
+        else:
+            self.write( 'ERROR: Printing' )
 
 class NoCacheStaticFileHandler(tornado.web.StaticFileHandler):
     def set_extra_headers(self, path):
@@ -112,8 +123,8 @@ class NoCacheStaticFileHandler(tornado.web.StaticFileHandler):
 application = tornado.web.Application([
     (r"/config", config),
     (r"/gcodefile", gcodefile),
-    (r"/gcodeindex", gcodeindex),
-    (r"/coordinates", coordinates),
+    (r"/positions", positions),
+    (r"/reset", resetpos),
 #    (r"/", LoginHandler),
     (r"/(.*)",  NoCacheStaticFileHandler, {"path": "./", "default_filename": "index.html"}),
 ], cookie_secret="MY_BIG_SECRET")

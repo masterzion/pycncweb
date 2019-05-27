@@ -33,6 +33,7 @@ function GCodeImporter() { }
 GCodeImporter.importPath = function(path, callback) {
   FileIO.loadPath(path, function(gcode) {
     GCodeImporter.importText(gcode, callback);
+    $('#gcodetext').text(gcode);
   });
 }
 
