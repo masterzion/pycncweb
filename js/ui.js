@@ -129,19 +129,6 @@ $(function() {
     event.preventDefault();
 
     FileIO.load(event.originalEvent.dataTransfer.files, function(gcode) {
-
-      $.ajax
-      ({
-          type: "POST",
-          url: '/gcodefile',
-          dataType: 'json',
-          contentType: "application/json; charset=utf-8",
-          async: false,
-          data: gcode,
-          success: function () {
-          console.log("uploaded!");
-          }
-      })
       GCodeImporter.importText(gcode, onGCodeLoaded);
     });
 

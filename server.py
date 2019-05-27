@@ -3,6 +3,7 @@ import configparser, json, html
 import tornado.ioloop
 import tornado.web
 import cnc.config
+import _thread
 import cnc.logging_config as logging_config
 from cnc.gcode import GCode, GCodeException
 from cnc.gmachine import GMachine, GMachineException
@@ -21,11 +22,45 @@ machine = GMachine()
 cancelprint = False;
 isprinting = False;
 
+def do_line(line):
+    try:
+        g = GCode.parse_line(line)
+        res = machine.do_command(g)
+    except (GCodeException, GMachineException) as e:
+        return 'ERROR ' + str(e)
+    if res is not None:
+        return 'OK ' + res
+    else:
+        return 'OK'
+    return True
+
+def PrintFile():
+    global isprinting
+    global cancelprint
+    global gcodeindex
+    global gcodetext
+
+    isprinting = True
+    cancelprint = False
+    print("printing "+ str(len(gcodetext)) + " lines" )
+    logging_config.debug_disable()
+    for line in gcodetext:
+        print('line'+str(gcodeindex))
+        if cancelprint:
+            isprinting = False
+            break;
+        gcodeindex+=1
+        do_line(line)
+    logging_config.debug_enable()
+
 class gcodefile(tornado.web.RequestHandler):
     def post(self):
+        global gcodeindex
+        global gcodetext
+        gcodeindex=0
         str=self.request.body.decode('utf-8')
         gcodetext=str.split('\n')
-        print(gcodetext)
+#        print(gcodetext)
         self.write( 'ok' )
 
 class config(tornado.web.RequestHandler):
@@ -61,26 +96,39 @@ class config(tornado.web.RequestHandler):
         machine.reloadconfig()
         self.write( 'ok' )
 
-
-def do_line(line):
-    try:
-        g = GCode.parse_line(line)
-        res = machine.do_command(g)
-    except (GCodeException, GMachineException) as e:
-        return 'ERROR ' + str(e)
-    if res is not None:
-        return 'OK ' + res
-    else:
-        return 'OK'
-    return True
-
-
-
-
-class resetpos(tornado.web.RequestHandler):
+class gcodeaction(tornado.web.RequestHandler):
     def post(self):
-        machine.reloadconfig()
-        self.write( "ok" )
+        global isprinting
+        global cancelprint
+        global gcodeindex
+        global gcodetext
+
+        action = str(self.request.body, 'utf8')
+        res=""
+        print(action)
+        if action == "pause":
+            if isprinting:
+                cancelprint = True
+                res="OK"
+            else:
+                res="ERROR: not printing"
+        elif action == "stop":
+            cancelprint = True
+            gcodeindex = 0
+            res="OK"
+        elif action == "play":
+            if isprinting:
+                res="ERROR: is already printing"
+            else:
+                self.thread = _thread.start_new_thread(PrintFile, () )
+                self.write( "ok" )
+        elif action == "reset":
+            if isprinting:
+                res='ERROR: Printing'
+            else:
+                machine.reloadconfig()
+                res="ok"
+        self.write( res )
 
 class positions(tornado.web.RequestHandler):
     def get(self):
@@ -124,7 +172,7 @@ application = tornado.web.Application([
     (r"/config", config),
     (r"/gcodefile", gcodefile),
     (r"/positions", positions),
-    (r"/reset", resetpos),
+    (r"/gcodeaction", gcodeaction),
 #    (r"/", LoginHandler),
     (r"/(.*)",  NoCacheStaticFileHandler, {"path": "./", "default_filename": "index.html"}),
 ], cookie_secret="MY_BIG_SECRET")

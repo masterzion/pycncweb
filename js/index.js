@@ -207,17 +207,39 @@ function addpos(axis, value) {
     });
 }
 
-function reset() {
+function homeaxis() {
+  data={}
+  data["pos"]= {}
+  data["pos"]["X"] = 0;
+  data["pos"]["Y"] = 0;
+  data["pos"]["Z"] = 0;
+  data["pos"]["E"] = 0;
+  console.log(data);
+  $.ajax
+  ({
+      type: "POST",
+      url: '/positions',
+      dataType: 'json',
+      contentType: "application/json; charset=utf-8",
+      async: false,
+      data: JSON.stringify(data),
+      success: function () {
+        console.log("addpos");
+      }
+  });
+}
+
+function gcodeaction(gcodeaction) {
     $.ajax
     ({
         type: "POST",
-        url: '/reset',
+        url: '/gcodeaction',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         async: false,
-        data: "reset",
-        success: function () {
-          console.log("reset");
+        data: gcodeaction,
+        success: function (data) {
+          console.log(gcodeaction+": "+data);
         }
     });
 }

@@ -79,10 +79,13 @@
       	</ul>
         <hr>
         <h3>Actions</h3>
-      	<ul class="Nav Nav_Small MainNav">
-      		<li class="MainNav-Button" id="reset"><a href="#" onclick="reset()">Reset</a></li>
-          <li class="MainNav-Button" id="about"><a href="#" onclick="openabout()">About</a></li>
-      	</ul>
+        <div class="controlcontainer">
+        	<ul class="Nav Nav_Small MainNav">
+        		<li class="MainNav-Button" id="reset"><a href="#"  onclick="gcodeaction('reset')">&#x274C;</a></li>
+        		<li class="MainNav-Button" id="homeaxis"><a href="#" onclick="homeaxis()">&#127968;</a></li>
+            <li class="MainNav-Button" id="about"><a href="#" onclick="openabout()">&#10068;</a></li>
+        	</ul>
+        </div>
       </div>
     </div>
   	<div id="divgcode">
@@ -91,9 +94,9 @@
         <p>To view your own model, drag a gcode file from your desktop and drop it in this window.</p>
         <div class="controlcontainer">
           <ul class="Nav Nav_Small MainNav">
-            <li class="MainNav-Button" id="Play"><a href="#">&#9658;</a></li>
-            <li class="MainNav-Button" id="Pause"><a href="#">&#9616;&nbsp;&#9612;</a></li>
-            <li class="MainNav-Button" id="Stop"><a href="#">&#9724;</a></li>
+            <li class="MainNav-Button" id="Play"><a href="#" onclick="gcodeaction('play')">&#9658;</a></li>
+            <li class="MainNav-Button" id="Pause"><a href="#" onclick="gcodeaction('pause')">&#9616;&nbsp;&#9612;</a></li>
+            <li class="MainNav-Button" id="Stop"><a href="#" onclick="gcodeaction('stop')">&#9724;</a></li>
           </ul>
         </div>
         <textarea rows="15" cols="55"  id="gcodetext" readonly></textarea>
