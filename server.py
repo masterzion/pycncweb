@@ -42,7 +42,11 @@ def PrintFile():
 
     isprinting = True
     cancelprint = False
-    print("printing "+ str(len(gcodetext)) + " lines" )
+    totallines=len(gcodetext)
+    print("printing "+ str(totallines) + " lines" )
+    if gcodeindex == totallines:
+        gcodeindex=0
+
     logging_config.debug_disable()
     for line in gcodetext:
         print('line'+str(gcodeindex))
@@ -51,6 +55,8 @@ def PrintFile():
             break;
         gcodeindex+=1
         do_line(line)
+    isprinting = False
+    cancelprint = False
     logging_config.debug_enable()
 
 class gcodefile(tornado.web.RequestHandler):
