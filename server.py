@@ -55,6 +55,8 @@ def PrintFile():
             break;
         gcodeindex+=1
         do_line(line)
+    #home axis
+    do_line('G28')
     isprinting = False
     cancelprint = False
     logging_config.debug_enable()
