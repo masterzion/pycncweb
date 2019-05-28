@@ -9,6 +9,11 @@ This is a web interface for a modified version of PyCNC using gcode-viewer
 
 ![Screenshot3](https://github.com/masterzion/pycncweb/blob/master/doc/screen3.png)
 
+# Dependences:
+
+pip3 install tornado
+
+
 # References:
 
 my pycnc version: https://github.com/masterzion/PyCNC
