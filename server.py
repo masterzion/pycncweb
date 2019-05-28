@@ -49,7 +49,7 @@ def PrintFile():
 
     logging_config.debug_disable()
     for line in gcodetext:
-        print('line'+str(gcodeindex))
+#        print('line: '+str(gcodeindex))
         if cancelprint:
             isprinting = False
             break;
@@ -65,11 +65,12 @@ class gcodefile(tornado.web.RequestHandler):
         self.write( gcodetext.join('\n') )
 
     def post(self):
+        global isprinting
+        global gcodeindex
+        global gcodetext
         if isprinting:
-           res='ERROR: Printing'
+           self.write( 'ERROR: Printing' )
         else:
-            global gcodeindex
-            global gcodetext
             gcodeindex=0
             str=self.request.body.decode('utf-8')
             gcodetext=str.split('\n')
@@ -77,7 +78,7 @@ class gcodefile(tornado.web.RequestHandler):
             self.write( 'ok' )
     def get(self):
             global gcodetext
-            self.write( gcodetext.join('\n') )
+            self.write( '\n'.join(gcodetext) )
 
 
 class config(tornado.web.RequestHandler):
@@ -149,6 +150,8 @@ class gcodeaction(tornado.web.RequestHandler):
 
 class positions(tornado.web.RequestHandler):
     def get(self):
+        global gcodeindex
+        global printing
         self.set_header('Content-type','application/json')
         coord=machine.coordinates()
         obj={
@@ -156,12 +159,14 @@ class positions(tornado.web.RequestHandler):
             "Y" : coord[1],
             "Z" : coord[2],
             "E" : coord[3],
-            "gcodeindex" : (gcodeindex+0)
+            "gcodeindex" : gcodeindex,
+            "printing" : isprinting
         }
 #        print (obj);
         self.write( json.dumps( obj ) )
 
     def post(self):
+        global isprinting
         if not isprinting:
             config = configparser.ConfigParser()
             json_data = json.loads(self.request.body.decode('utf-8'))

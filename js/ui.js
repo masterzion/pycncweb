@@ -136,15 +136,21 @@ $(function() {
 
   scene = createScene($('#renderArea')[0]);
 
-  var lastImported = localStorage.getItem(config.lastImportedKey);
-  if (lastImported) {
-    GCodeImporter.importText(lastImported, onGCodeLoaded);
-  } else {
-    GCodeImporter.importPath(config.defaultFilePath, onGCodeLoaded);
-  }
+  $.getJSON({
+        url: "/positions"
+    }).done(function (data, status, xhr) {
+      if (data.printing) {
+        GCodeImporter.importPath('/gcodefile', onGCodeLoaded);
+        setupGui();
+      } else {
+        GCodeImporter.importPath(config.defaultFilePath, onGCodeLoaded);
+        setupGui();
+      }
+    });
 
-  setupGui();
-});
+
+
+  });
 
 
 var guiControllers = {
@@ -192,7 +198,6 @@ function Jump(line)
   var jump = (line - 1) * lineHeight;
   ta.scrollTop = jump;
 }
-
 
 setInterval(function(){
     $.getJSON({

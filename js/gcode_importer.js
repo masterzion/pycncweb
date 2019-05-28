@@ -34,26 +34,29 @@ GCodeImporter.importPath = function(path, callback) {
   FileIO.loadPath(path, function(gcode) {
     GCodeImporter.importText(gcode, callback);
     $('#gcodetext').text(gcode);
-
-
-    $.ajax
-    ({
-        type: "POST",
-        url: '/gcodefile',
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        async: false,
-        data: gcode,
-        success: function () {
-        console.log("uploaded!");
-        }
-    })
-
-
+    uploadgcode(gcode);
   });
 }
 
 GCodeImporter.importText = function(gcode, callback) {
   var gcodeModel = gcode; // TODO: actually get the model
+  uploadgcode(gcode);
   callback(gcodeModel);
+}
+
+
+function uploadgcode(gcode) {
+  $.ajax
+  ({
+      type: "POST",
+      url: '/gcodefile',
+      dataType: 'json',
+      contentType: "application/json; charset=utf-8",
+      async: false,
+      data: gcode,
+      success: function () {
+        console.log("uploaded!");
+      }
+  });
+
 }
