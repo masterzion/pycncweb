@@ -11,7 +11,7 @@ This is a web interface for a modified version of PyCNC using gcode-viewer
 
 # Dependences:
 
-pip3 install tornado
+sudo pip3 install tornado
 
 
 # References:
