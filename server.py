@@ -56,7 +56,7 @@ def PrintFile():
         gcodeindex+=1
         do_line(line)
     #home axis
-    do_line('G28')
+    do_line('G1 X0 Y0 Z0')
     isprinting = False
     cancelprint = False
     logging_config.debug_enable()
